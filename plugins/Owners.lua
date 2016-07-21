@@ -613,13 +613,20 @@ end
 
 return {
   patterns = {
-    "^[#!/]owners (%d+) ([^%s]+) (.*)$",
-    "^[#!/]owners (%d+) ([^%s]+)$",
-    "^[#!/](changeabout) (%d+) (.*)$",
-    "^[#!/](changerules) (%d+) (.*)$",
-    "^[#!/](changename) (%d+) (.*)$",
-    "^[#!/](viewsettings) (%d+)$",
-	"^[#!/](loggroup) (%d+)$"
+    "^[#!/]([Oo]wners) (%d+) ([^%s]+) (.*)$",
+    "^[#!/]([Oo]wners) (%d+) ([^%s]+)$",
+    "^[#!/]([Cc]hangeabout) (%d+) (.*)$",
+    "^[#!/]([Cc]hangerules) (%d+) (.*)$",
+    "^[#!/]([Cc]hangename) (%d+) (.*)$",
+    "^[#!/]([Vv]iewsettings) (%d+)$",
+    "^[#!/]([Ll]oggroup) (%d+)$",
+    "^([Oo]wners) (%d+) ([^%s]+) (.*)$",
+    "^([Oo]wners) (%d+) ([^%s]+)$",
+    "^([Cc]hangeabout) (%d+) (.*)$",
+    "^([Cc]hangerules) (%d+) (.*)$",
+    "^([Cc]hangename) (%d+) (.*)$",
+    "^([Vv]iewsettings) (%d+)$",
+    "^([Ll]oggroup) (%d+)$"
   },
   run = run
 }
