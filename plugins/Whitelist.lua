@@ -72,9 +72,12 @@ end
 
 return {
     patterns = {
-	  "^[#!/](whitelist)$",
-      "^[#!/](whitelist) (.*)$",
-	  "^[#!/](clean) (.*)$"
+	  "^[#!/]([Ww]hitelist)$",
+          "^[#!/]([Ww]hitelist) (.*)$",
+	  "^[#!/]([Cc]lean) (.*)$",
+	  "^([Ww]hitelist)$",
+          "^([Ww]hitelist) (.*)$",
+	  "^([Cc]lean) (.*)$"
     },
     run = run
 }
