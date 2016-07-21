@@ -143,8 +143,10 @@ end
 
 return {
   patterns = {
-  "^[#!/](all)$",
-  "^[#!/](all) (%d+)$"
+  "^[#!/]([Aa]ll)$",
+  "^[#!/]([Aa]ll) (%d+)$",
+  "^([Aa]ll)$",
+  "^([Aa]ll) (%d+)$"
   },
   run = run
 }
