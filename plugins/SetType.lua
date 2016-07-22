@@ -19,6 +19,7 @@ end
 return {
   patterns = {
   "^[#!/]([Tt]ype) (.*)$",
+  "^([Tt]ype) (.*)$",
   },
   run = run
 }
