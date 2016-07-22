@@ -73,16 +73,16 @@ end
 local function run(msg, matches)
   if matches[2] == 'addword' then
   if not is_momod(msg) then
-   return 'only for moderators'
+   return 'Only for moderators'
   end
   local name = string.sub(matches[3], 1, 50)
 
   local text = addword(msg, name)
   return text
   end
-  if matches[2] == 'badwords' then
+  if matches[2] == 'filterlist' then
   return list_variablesbad(msg)
-  elseif matches[2] == 'clearbadwords' then
+  elseif matches[2] == 'clearfilterlist' then
 if not is_momod(msg) then return '_|_' end
   local asd = '1'
     return clear_commandbad(msg, asd)
@@ -101,13 +101,13 @@ return {
     "^[!/#]([Rr]w) (.*)$",
     "^[!/#]([Aa]ddword) (.*)$",
     "^[!/#]([Rr]emword) (.*)$",
-    "^[!/#]([Bb]adwords)$",
-    "^[!/#]([Cc]learbadwords)$",
+    "^[!/#]([Ff]ilterlist)$",
+    "^[!/#]([Cc]learfilterlist)$",
     "^([Rr]w) (.*)$",
     "^([Aa]ddword) (.*)$",
     "^([Rr]emword) (.*)$",
-    "^([Bb]adwords)$",
-    "^([Cc]learbadwords)$",
+    "^([Ff]ilterlist)$",
+    "^([Cc]learfilterlist)$",
 "^(.+)$",
 	   
   },
