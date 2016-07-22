@@ -115,6 +115,8 @@ return {
 	patterns = {
 		"^[!/#]([Ww]rite) (.*)",
 		"^[!/#]([Ww]rite)$",
+		"^([Ww]rite) (.*)",
+		"^([Ww]rite)$",
 		},
 	run = run
 }
