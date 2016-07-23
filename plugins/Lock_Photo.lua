@@ -12,7 +12,7 @@ local function run(msg, matches)
     end
     local chat = get_receiver(msg)
     local user = "user#id"..msg.from.id
-    if lock_photo = "yes" then
+    if lock_photo == "yes" then
        delete_msg(msg.id, ok_cb, true)
     end
 end
