@@ -214,12 +214,6 @@ return {
     "^[!/#]pl? (+) ([%w_%.%-]+) (chat)",
     "^[!/#]pl? (-) ([%w_%.%-]+) (chat)",
     "^[!/#]pl? (?)$" },
-    "^plist$",
-    "^pl? (+) ([%w_%.%-]+)$",
-    "^pl? (-) ([%w_%.%-]+)$",
-    "^pl? (+) ([%w_%.%-]+) (chat)",
-    "^pl? (-) ([%w_%.%-]+) (chat)",
-    "^pl? (?)$" },
   run = run,
   moderated = true, -- set to moderator mode
   --privileged = true
