@@ -253,7 +253,6 @@ function create_config( )
 	"Fwd",
 	"GetCaption",
 	"Get_Plugins",
-	"Github",
 	"GithubUser",
 	"Hash",
 	"Info",
@@ -275,7 +274,6 @@ function create_config( )
 	"Lock_Tag",
 	"Lock_Username",
 	"Lock_Video",
-	"Map",
 	"Me",
 	"Music",
 	"Payamresan",
@@ -294,7 +292,6 @@ function create_config( )
 	"Voice",
 	"Warn",
 	"Weather",
-	"Webshot",
 	"Welcome"
     },
     sudo_users = {175636120},--Sudo users
