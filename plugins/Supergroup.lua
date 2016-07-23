@@ -690,6 +690,90 @@ local function unlock_group_video(msg, data, target)
   end
 end
 
+local function lock_group_etehad(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_etehad_lock = data[tostring(target)]['settings']['etehad']
+  if group_etehad_lock == 'yes' then
+    return 'Etehad settings is already locked'
+  else
+    data[tostring(target)]['settings']['etehad'] = 'yes'
+    save_data(_config.moderation.data, data)
+    return 'Etehad settings has been locked'
+  end
+end
+
+local function unlock_group_etehad(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_etehad_lock = data[tostring(target)]['settings']['etehad']
+  if group_etehad_lock == 'no' then
+    return 'Etehad settings is not locked'
+  else
+    data[tostring(target)]['settings']['etehad'] = 'no'
+    save_data(_config.moderation.data, data)
+    return 'Etehad settings has been unlocked'
+  end
+end
+
+local function lock_group_normal(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_normal_lock = data[tostring(target)]['settings']['normal']
+  if group_normal_lock == 'yes' then
+    return 'Normal settings is already locked'
+  else
+    data[tostring(target)]['settings']['normal'] = 'yes'
+    save_data(_config.moderation.data, data)
+    return 'Normal settings has been locked'
+  end
+end
+
+local function unlock_group_normal(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_normal_lock = data[tostring(target)]['settings']['normal']
+  if group_normal_lock == 'no' then
+    return 'Normal settings is not locked'
+  else
+    data[tostring(target)]['settings']['normal'] = 'no'
+    save_data(_config.moderation.data, data)
+    return 'Normal settings has been unlocked'
+  end
+end
+
+local function lock_group_friendly(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_friendly_lock = data[tostring(target)]['settings']['friendly']
+  if group_friendly_lock == 'yes' then
+    return 'Friendly settings is already locked'
+  else
+    data[tostring(target)]['settings']['friendly'] = 'yes'
+    save_data(_config.moderation.data, data)
+    return 'Friendly settings has been locked'
+  end
+end
+
+local function unlock_group_friendly(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_friendly_lock = data[tostring(target)]['settings']['friendly']
+  if group_friendly_lock == 'no' then
+    return 'Friendly settings is not locked'
+  else
+    data[tostring(target)]['settings']['friendly'] = 'no'
+    save_data(_config.moderation.data, data)
+    return 'Friendly settings has been unlocked'
+  end
+end
+
 local function lock_group_arabic(msg, data, target)
   if not is_momod(msg) then
     return
@@ -1045,6 +1129,26 @@ end
 		end
         end
       if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['etehad'] then
+			data[tostring(target)]['settings']['etehad'] = 'no'
+		end
+        end
+      if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['normal'] then
+			data[tostring(target)]['settings']['normal'] = 'no'
+		end
+        end
+      if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['friendly'] then
+			data[tostring(target)]['settings']['friendly'] = 'no'
+		end
+        end
+      if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['all'] then
+			data[tostring(target)]['settings']['all'] = 'no'
+		end
+        end
+      if data[tostring(target)]['settings'] then
 		if not data[tostring(target)]['settings']['chat'] then
 			data[tostring(target)]['settings']['chat'] = 'no'
 		end
@@ -1120,7 +1224,7 @@ end
 		end
 	end
   local settings = data[tostring(target)]['settings']
-  local text = "⚙ SuperGroup Settings: ⚙\n➖➖➖➖➖➖➖➖➖\n🗝 Lock links : "..settings.lock_link.."\n🗝 Lock flood: "..settings.flood.."\n🗝 Flood sensitivity : "..NUM_MSG_MAX.."\n🗝 Lock spam: "..settings.lock_spam.."\n🗝 Lock Arabic: "..settings.lock_arabic.."\n🗝 Lock Member: "..settings.lock_member.."\n🗝 Lock RTL: "..settings.lock_rtl.."\n🗝 Lock Tgservice : "..settings.lock_tgservice.."\n🗝 Lock sticker: "..settings.lock_sticker.."\n🗝 Lock Chat: "..settings.chat.."\n🗝 Lock Emoji: "..settings.emoji.."\n🗝 Lock English: "..settings.english.."\n🗝 Lock Fosh: "..settings.fosh.."\n🗝 Lock Fwd: "..settings.fwd.."\n🗝 Lock Join: "..settings.join.."\n🗝 Lock Media: "..settings.media.."\n🗝 Lock Operator: "..settings.operator.."\n🗝 Lock Reply: "..settings.reply.."\n🗝 Lock Tag: "..settings.tag.."\n🗝 Lock Username: "..settings.username.."\n➖➖➖➖➖➖➖➖➖\n⚙ Media Settings: ⚙\n➖➖➖➖➖➖➖➖➖\n🖥 Lock Audio: "..settings.audio.."\n🖥 Lock Gif: "..settings.gif.."\n🖥 Lock Photo: "..settings.photo.."\n🖥 Lock Video: "..settings.video.."\n⚙ More Settings: ⚙\n🗝 Public: "..settings.public.."\n🗝 Strict settings: "..settings.strict.."\n🗝 Lock All: "..settings.all.."\n🔑 Bot Version: 1.0"
+  local text = "⚙ SuperGroup Settings: ⚙\n➖➖➖➖➖➖➖➖➖\n🗝 Lock links : "..settings.lock_link.."\n🗝 Lock flood: "..settings.flood.."\n🗝 Flood sensitivity : "..NUM_MSG_MAX.."\n🗝 Lock spam: "..settings.lock_spam.."\n🗝 Lock Arabic: "..settings.lock_arabic.."\n🗝 Lock Member: "..settings.lock_member.."\n🗝 Lock RTL: "..settings.lock_rtl.."\n🗝 Lock Tgservice : "..settings.lock_tgservice.."\n🗝 Lock sticker: "..settings.lock_sticker.."\n🗝 Lock Chat: "..settings.chat.."\n🗝 Lock Emoji: "..settings.emoji.."\n🗝 Lock English: "..settings.english.."\n🗝 Lock Fosh: "..settings.fosh.."\n🗝 Lock Fwd: "..settings.fwd.."\n🗝 Lock Join: "..settings.join.."\n🗝 Lock Media: "..settings.media.."\n🗝 Lock Operator: "..settings.operator.."\n🗝 Lock Reply: "..settings.reply.."\n🗝 Lock Tag: "..settings.tag.."\n🗝 Lock Username: "..settings.username.."\n➖➖➖➖➖➖➖➖➖\n⚙ Media Settings: ⚙\n➖➖➖➖➖➖➖➖➖\n🖥 Lock Audio: "..settings.audio.."\n🖥 Lock Gif: "..settings.gif.."\n🖥 Lock Photo: "..settings.photo.."\n🖥 Lock Video: "..settings.video.."\n➖➖➖➖➖➖➖➖➖\n☢ Switch Models: ☢\n➖➖➖➖➖➖➖➖➖\n🗝 Switch Model Etehad: "..settings.etehad.."\n🗝 Switch Model Normal: "..settings.normal.."\n🗝 Switch Model Friendly: "..settings.friendly.."\n➖➖➖➖➖➖➖➖➖\n⚙ More Settings: ⚙\n➖➖➖➖➖➖➖➖➖\n🗝 Public: "..settings.public.."\n🗝 Strict settings: "..settings.strict.."\n🗝 Lock All: "..settings.all.."\n🔑 Bot Version: 1.0"
   return text
 end
 
@@ -2224,6 +2328,114 @@ local hash = 'kick:'..msg.to.id..':'..msg.from.id
 
 		if matches[1] == 'lock' and is_momod(msg) then
 			local target = msg.to.id
+			     if matches[2] == 'all' then
+      	local safemode ={
+                lock_group_links(msg, data, target),
+		lock_group_tag(msg, data, target),
+		lock_group_chat(msg, data, target),
+		lock_group_spam(msg, data, target),
+		lock_group_flood(msg, data, target),
+		lock_group_arabic(msg, data, target),
+		lock_group_membermod(msg, data, target),
+		lock_group_rtl(msg, data, target),
+		lock_group_tgservice(msg, data, target),
+		lock_group_sticker(msg, data, target),
+		lock_group_contacts(msg, data, target),
+		lock_group_english(msg, data, target),
+		lock_group_fwd(msg, data, target),
+		lock_group_reply(msg, data, target),
+		lock_group_join(msg, data, target),
+		lock_group_emoji(msg, data, target),
+		lock_group_username(msg, data, target),
+		lock_group_fosh(msg, data, target),
+		lock_group_media(msg, data, target),
+		lock_group_leave(msg, data, target),
+		lock_group_bots(msg, data, target),
+		lock_group_operator(msg, data, target),
+      	}
+      	return lock_group_all(msg, data, target), safemode
+      end
+			     if matches[2] == 'etehad' then
+      	local etehad ={
+                unlock_group_links(msg, data, target),
+                unlock_group_chat(msg, data, target),
+		lock_group_tag(msg, data, target),
+		lock_group_spam(msg, data, target),
+		lock_group_flood(msg, data, target),
+		unlock_group_arabic(msg, data, target),
+		lock_group_membermod(msg, data, target),
+		unlock_group_rtl(msg, data, target),
+		lock_group_tgservice(msg, data, target),
+		lock_group_sticker(msg, data, target),
+		unlock_group_contacts(msg, data, target),
+		unlock_group_english(msg, data, target),
+		unlock_group_fwd(msg, data, target),
+		unlock_group_reply(msg, data, target),
+		lock_group_join(msg, data, target),
+		unlock_group_emoji(msg, data, target),
+		unlock_group_username(msg, data, target),
+		lock_group_fosh(msg, data, target),
+		unlock_group_media(msg, data, target),
+		lock_group_leave(msg, data, target),
+		lock_group_bots(msg, data, target),
+		unlock_group_operator(msg, data, target),
+      	}
+      	return lock_group_etehad(msg, data, target), etehad
+end
+                        if matches[2] == 'normal' then
+      	local normal ={
+                lock_group_links(msg, data, target),
+		lock_group_tag(msg, data, target),
+		unlock_group_chat(msg, data, target),
+		lock_group_spam(msg, data, target),
+		lock_group_flood(msg, data, target),
+		unlock_group_arabic(msg, data, target),
+		unlock_group_membermod(msg, data, target),
+		unlock_group_rtl(msg, data, target),
+		lock_group_tgservice(msg, data, target),
+		unlock_group_sticker(msg, data, target),
+		lock_group_contacts(msg, data, target),
+		unlock_group_english(msg, data, target),
+		lock_group_fwd(msg, data, target),
+		unlock_group_reply(msg, data, target),
+		unlock_group_join(msg, data, target),
+		unlock_group_emoji(msg, data, target),
+		lock_group_username(msg, data, target),
+		lock_group_fosh(msg, data, target),
+		lock_group_media(msg, data, target),
+		lock_group_leave(msg, data, target),
+		lock_group_bots(msg, data, target),
+		lock_group_operator(msg, data, target),
+      	}
+      	return lock_group_normal(msg, data, target), normal
+      end
+                        if matches[2] == 'friendly' then
+      	local friendly ={
+                lock_group_links(msg, data, target),
+		lock_group_tag(msg, data, target),
+		unlock_group_chat(msg, data, target),
+		lock_group_spam(msg, data, target),
+		lock_group_flood(msg, data, target),
+		unlock_group_arabic(msg, data, target),
+		lock_group_membermod(msg, data, target),
+		lock_group_rtl(msg, data, target),
+		unlock_group_tgservice(msg, data, target),
+		lock_group_sticker(msg, data, target),
+		lock_group_contacts(msg, data, target),
+		lock_group_english(msg, data, target),
+		lock_group_fwd(msg, data, target),
+		lock_group_reply(msg, data, target),
+		lock_group_join(msg, data, target),
+		lock_group_emoji(msg, data, target),
+		lock_group_username(msg, data, target),
+		unlock_group_fosh(msg, data, target),
+		lock_group_media(msg, data, target),
+		lock_group_leave(msg, data, target),
+		lock_group_bots(msg, data, target),
+		lock_group_operator(msg, data, target),
+      	}
+      	return lock_group_friendly(msg, data, target), friendly
+      end
 			if matches[2] == 'links' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked link posting ")
 				return lock_group_links(msg, data, target)
@@ -2328,6 +2540,114 @@ local hash = 'kick:'..msg.to.id..':'..msg.from.id
 
 		if matches[1] == 'unlock' and is_momod(msg) then
 			local target = msg.to.id
+			     if matches[2] == 'all' then
+      	local safemode ={
+                unlock_group_links(msg, data, target),
+		unlock_group_tag(msg, data, target),
+		unlock_group_chat(msg, data, target),
+		unlock_group_spam(msg, data, target),
+		unlock_group_flood(msg, data, target),
+		unlock_group_arabic(msg, data, target),
+		unlock_group_membermod(msg, data, target),
+		unlock_group_rtl(msg, data, target),
+		unlock_group_tgservice(msg, data, target),
+		unlock_group_sticker(msg, data, target),
+		unlock_group_contacts(msg, data, target),
+		unlock_group_english(msg, data, target),
+		unlock_group_fwd(msg, data, target),
+		unlock_group_reply(msg, data, target),
+		unlock_group_join(msg, data, target),
+		unlock_group_emoji(msg, data, target),
+		unlock_group_username(msg, data, target),
+		unlock_group_fosh(msg, data, target),
+		unlock_group_media(msg, data, target),
+		unlock_group_leave(msg, data, target),
+		unlock_group_bots(msg, data, target),
+		unlock_group_operator(msg, data, target),
+      	}
+      	return lock_group_all(msg, data, target), safemode
+      end
+			     if matches[2] == 'etehad' then
+      	local etehad ={
+                unlock_group_links(msg, data, target),
+                unlock_group_chat(msg, data, target),
+		unlock_group_tag(msg, data, target),
+		unlock_group_spam(msg, data, target),
+		unlock_group_flood(msg, data, target),
+		unlock_group_arabic(msg, data, target),
+		unlock_group_membermod(msg, data, target),
+		unlock_group_rtl(msg, data, target),
+		unlock_group_tgservice(msg, data, target),
+		unlock_group_sticker(msg, data, target),
+		unlock_group_contacts(msg, data, target),
+		unlock_group_english(msg, data, target),
+		unlock_group_fwd(msg, data, target),
+		unlock_group_reply(msg, data, target),
+		unlock_group_join(msg, data, target),
+		unlock_group_emoji(msg, data, target),
+		unlock_group_username(msg, data, target),
+		unlock_group_fosh(msg, data, target),
+		unlock_group_media(msg, data, target),
+		lock_group_leave(msg, data, target),
+		lock_group_bots(msg, data, target),
+		lock_group_operator(msg, data, target),
+      	}
+      	return lock_group_etehad(msg, data, target), etehad
+end
+                        if matches[2] == 'normal' then
+      	local normal ={
+                lock_group_links(msg, data, target),
+		lock_group_tag(msg, data, target),
+		unlock_group_chat(msg, data, target),
+		lock_group_spam(msg, data, target),
+		lock_group_flood(msg, data, target),
+		unlock_group_arabic(msg, data, target),
+		unlock_group_membermod(msg, data, target),
+		unlock_group_rtl(msg, data, target),
+		lock_group_tgservice(msg, data, target),
+		unlock_group_sticker(msg, data, target),
+		lock_group_contacts(msg, data, target),
+		unlock_group_english(msg, data, target),
+		lock_group_fwd(msg, data, target),
+		unlock_group_reply(msg, data, target),
+		unlock_group_join(msg, data, target),
+		unlock_group_emoji(msg, data, target),
+		lock_group_username(msg, data, target),
+		lock_group_fosh(msg, data, target),
+		lock_group_media(msg, data, target),
+		lock_group_leave(msg, data, target),
+		lock_group_bots(msg, data, target),
+		lock_group_operator(msg, data, target),
+      	}
+      	return lock_group_normal(msg, data, target), normal
+      end
+                        if matches[2] == 'friendly' then
+      	local friendly ={
+                lock_group_links(msg, data, target),
+		lock_group_tag(msg, data, target),
+		unlock_group_chat(msg, data, target),
+		lock_group_spam(msg, data, target),
+		lock_group_flood(msg, data, target),
+		unlock_group_arabic(msg, data, target),
+		lock_group_membermod(msg, data, target),
+		unlock_group_rtl(msg, data, target),
+		unlock_group_tgservice(msg, data, target),
+		unlock_group_sticker(msg, data, target),
+		unlock_group_contacts(msg, data, target),
+		unlock_group_english(msg, data, target),
+		unlock_group_fwd(msg, data, target),
+		unlock_group_reply(msg, data, target),
+		unlock_group_join(msg, data, target),
+		unlock_group_emoji(msg, data, target),
+		unlock_group_username(msg, data, target),
+		unlock_group_fosh(msg, data, target),
+		unlock_group_media(msg, data, target),
+		lock_group_leave(msg, data, target),
+		lock_group_bots(msg, data, target),
+		unlock_group_operator(msg, data, target),
+      	}
+      	return lock_group_friendly(msg, data, target), friendly
+      end
 			if matches[2] == 'links' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked link posting")
 				return unlock_group_links(msg, data, target)
@@ -2843,5 +3163,3 @@ return {
   run = run,
   pre_process = pre_process
 }
---End supergrpup.lua
---By @Rondoozle
