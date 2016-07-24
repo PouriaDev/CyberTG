@@ -23,7 +23,7 @@ function run(msg, matches)
   local exp = db.size.." / 1000000"
   local sizeurl = 'http://api.mathjs.org/v1/?expr='..URL.escape(exp)
     local b,c = http.request(sizeurl)
-    local text = "عنوان : \n<code>"..db.title.."</code>\n نام پکیج :‌\n"..value.."\nسازنده :\n"..creator.."\n درباره : \n"..db.info.."\n ورژن : \n"..db.version.."\n نیاز به روت : \n"..needroot.."\n سایز : \n"..math.floor(b).." mb\n تصویر :\n"..photo.."\n لینک دانلود :\n"..shortlink(db.dlurl)
+    local text = "عنوان : \n"..db.title.."\n نام پکیج :‌\n"..value.."\nسازنده :\n"..creator.."\n درباره : \n"..db.info.."\n ورژن : \n"..db.version.."\n نیاز به روت : \n"..needroot.."\n سایز : \n"..math.floor(b).." mb\n تصویر :\n"..photo.."\n لینک دانلود :\n"..shortlink(db.dlurl)
   send_large_msg(get_receiver(msg),text,ok_cb,false)
     return 
     end
