@@ -1934,7 +1934,7 @@ local function run(msg, matches)
 		if matches[1] == 'kickme' then
 local hash = 'kick:'..msg.to.id..':'..msg.from.id
      redis:set(hash, "waite")
-      return "Dear User\nYou request a dismissal of the groups you've sent\nIf you agree to exit choose 'Yes'\nand for other choose 'No'\nThanks"
+      return "کاربر عزیز\nشما درخواست اخراج خود از گروه را ارسال کردید\nدر صورت موافقت با این درخواست عبارت Yes و در غیر این صورت عبارت No را ارسال کنید"
     end
 
     if msg.text then
