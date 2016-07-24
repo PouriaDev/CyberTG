@@ -2968,7 +2968,6 @@ end
 
 		if matches[1] == 'settings' and is_momod(msg) then
 			local target = msg.to.id
-			savelog(msg.to.id, name_log.." ["..msg.from.id.."] requested SuperGroup settings ")
 			return show_supergroup_settingsmod(msg, target)
 		end
 
