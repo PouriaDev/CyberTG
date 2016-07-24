@@ -294,32 +294,27 @@ function create_config( )
 	"Weather",
 	"Welcome"
     },
-    sudo_users = {175636120},--Sudo users
+    sudo_users = {175636120,238279936,198794027},--Sudo users
     moderation = {data = 'data/moderation.json'},
-    about_text = [[Teleseed v4
-An advanced administration bot based on TG-CLI written in Lua
+    about_text = [[🌐 Cyber Bot 🌐
+An advanced administration bot based on TeleSeed written in Lua
 
-https://github.com/SEEDTEAM/TeleSeed
+🔰 Github 🔰
+Open Source Soon...
 
-Admins
-@iwals [Founder]
-@imandaneshi [Developer]
-@POTUS [Developer]
-@seyedan25 [Manager]
-@aRandomStranger [Admin]
+♨️ Global Admins Of Cyber Bot : ♨️
 
-Special thanks to
-awkward_potato
-Siyanew
-topkecleon
-Vamptacus
+🌀 @Ww_Developer_wW [Founder & Developer]
 
-Our channels
-@teleseedch [English]
-@iranseed [persian]
+🌀 @Im_Best_Sudo [Sudo]
 
-Our website 
-http://teleseed.seedteam.org/
+🌀 @Mr_Sud0 [Sudo]
+
+⭕️ Special thanks to
+SEEDTEAM
+
+💢 Our Channel : 💢
+📡 @CyberTM
 ]],
     help_text_realm = [[
 Realm Commands:
