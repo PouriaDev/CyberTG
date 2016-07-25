@@ -411,6 +411,45 @@ You can also do it by reply
 !unban [id]
 You can also do it by reply
 
+bot off
+Turn off the bot
+
+bot onn
+Turn on the bot
+
+!setbye [value]
+Set goodbye message
+
+!delbye
+Delete goodbye message
+
+!addword [word]
+Add a word to filterlist
+
+!reword [word]
+Remove a word from filterlist
+
+!filterlist
+Show filterlist
+
+!clearfilterlist
+Clean filterlist
+
+!linkpv
+Send group link in private
+
+!warn [username|id|reply]
+Get warn to user
+
+!unwarn [username|id|reply]
+Unwarn user
+
+!setwlc [value]
+Set welcome message
+
+!delwlc
+Delete welcome message
+
 !who
 Members list
 
@@ -531,7 +570,7 @@ will return group ban list
 	help_text_super =[[
 SuperGroup Commands:
 
-!info
+!gpnfo
 Displays general info about the SuperGroup
 
 !admins
@@ -542,6 +581,45 @@ Returns group owner
 
 !modlist
 Returns Moderators list
+
+bot off
+Turn off the bot
+
+bot onn
+Turn on the bot
+
+!setbye [value]
+Set goodbye message
+
+!delbye
+Delete goodbye message
+
+!addword [word]
+Add a word to filterlist
+
+!reword [word]
+Remove a word from filterlist
+
+!filterlist
+Show filterlist
+
+!clearfilterlist
+Clean filterlist
+
+!linkpv
+Send group link in private
+
+!warn [username|id|reply]
+Get warn to user
+
+!unwarn [username|id|reply]
+Unwarn user
+
+!setwlc [value]
+Set welcome message
+
+!delwlc
+Delete welcome message
 
 !bots
 Lists bots in SuperGroup
