@@ -1,5 +1,5 @@
 local function run(msg, matches)
-        local text = URL.escape(matches[1])
+        local text = URL.escape(matches[2])
         local color = 'black'
         if matches[2] == 'red' then
             color = 'red'
