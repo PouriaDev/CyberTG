@@ -154,24 +154,43 @@ local function callback_reply(extra, success, result)
 		end
 	end
 	--info ------------------------------------------------------------------------------------------------
+            local token = "262137376:AAGLgdU9get8vekxXdYbuWgBvq-bhJXcfY0"
 			local url , res = http.request('http://api.gpmod.ir/time/')
             if res ~= 200 then return "No connection" end
             local jdat = json:decode(url)
 			local info = "نام کامل: "..string.gsub(msg.from.print_name, "_", " ").."\n"
 					.."نام کوچک: "..(msg.from.first_name or "-----").."\n"
-					.."نام خانوادگی: "..(msg.from.last_name or "-----").."\n\n"
+					.."نام خانوادگی: "..(msg.from.last_name or "-----").."\n"
 					.."شماره موبایل: "..number.."\n"
-					.."یوزرنیم: @"..(msg.from.username or "-----").."\n\n"
+					.."یوزرنیم: @"..(msg.from.username or "-----").."\n"
 					.."ساعت: "..jdat.FAtime.."\n"
 					.."تاريخ: "..jdat.FAdate.."\n"
-					.."آی دی: "..msg.from.id.."\n\n"
+					.."آی دی: "..msg.from.id.."\n"
 					.."مقام: "..usertype.."\n"
-					.."جایگاه: "..userrank.."\n\n"
+					.."جایگاه: "..userrank.."\n"
 					.."رابط کاربری: "..hardware.."\n"
-					.."تعداد پیامها: "..user_info.msgs.."\n\n"
+					.."تعداد پیامها: "..user_info.msgs.."\n"
 					.."نام گروه: "..string.gsub(msg.to.print_name, "_", " ").."\n"
 					.."آی دی گروه: "..msg.to.id
-	send_large_msg(org_chat_id, info)
+	    local user_id = msg.from.id
+            local chat_id = get_receiver(msg)
+            local db = 'https://api.telegram.org/bot'..token..'/getUserProfilePhotos?user_id='..user_id
+            local path = 'https://api.telegram.org/bot'..token..'/getFile?file_id='
+            local img = 'https://api.telegram.org/file/bot'..token..'/'
+            local res, code = https.request(db)
+            local jdat = json:decode(res)
+            local fileid = jdat.result.photos[1][3].file_id
+            local count = jdat.result.total_count
+                if tonumber(count) == 0 then
+	send_large_msg(org_chat_id,info,ok_cb,false)
+                else
+            local pt, code = https.request(path..fileid)
+            local jdat2 = json:decode(pt)
+            local path2 = jdat2.result.file_path
+            local link = img..path2
+            local photo = download_to_file(link,"ax"..user_id..".jpg")
+        send_photo2(receiver, file, photo, rmtmp_cb, cb_extra)
+      end
 end
 
 local function callback_res(extra, success, result)
@@ -392,7 +411,6 @@ local function callback_info(extra, success, result)
 	.."نام خانوادگی: "..(result.last_name or "-----").."\n\n"
 	.."شماره موبایل: "..number.."\n"
 	.."یوزرنیم: @"..(result.username or "-----").."\n"
-	.."ساعت: "..msg.from.time.."\n"
 	.."آی دی: "..result.id.."\n\n"
 	.."مقام: "..usertype.."\n"
 	.."جایگاه: "..userrank.."\n\n"
@@ -402,10 +420,7 @@ end
 local function run(msg, matches)
 	local data = load_data(_config.moderation.data)
 	org_channel_id = "channel#id"..msg.to.id
-	if is_sudo(msg) then
 		access = 1
-	else
-		access = 0
 	end
 	if matches[1] == 'delrank' and is_sudo(msg) then
 		azlemagham = io.popen('rm ./info/'..matches[2]..'.txt'):read('*all')
@@ -491,26 +506,42 @@ local function run(msg, matches)
 				number = "-----"
 			end
 			--time ------------------------------------------------------------------------------------------------
+            local token = "262137376:AAGLgdU9get8vekxXdYbuWgBvq-bhJXcfY0"
 			local url , res = http.request('http://api.gpmod.ir/time/')
             if res ~= 200 then return "No connection" end
             local jdat = json:decode(url)
 			local info = "نام کامل: "..string.gsub(msg.from.print_name, "_", " ").."\n"
 					.."نام کوچک: "..(msg.from.first_name or "-----").."\n"
-					.."نام خانوادگی: "..(msg.from.last_name or "-----").."\n\n"
+					.."نام خانوادگی: "..(msg.from.last_name or "-----").."\n"
 					.."شماره موبایل: "..number.."\n"
-					.."یوزرنیم: @"..(msg.from.username or "-----").."\n\n"
-					.."ساعت : "..jdat.FAtime.."\n"
-					.."تاريخ :"..jdat.FAdate.."\n"
-					.."آی دی: "..msg.from.id.."\n\n"
+					.."یوزرنیم: @"..(msg.from.username or "-----").."\n"
+					.."ساعت: "..jdat.FAtime.."\n"
+					.."تاريخ: "..jdat.FAdate.."\n"
+					.."آی دی: "..msg.from.id.."\n"
 					.."مقام: "..usertype.."\n"
-					.."جایگاه: "..userrank.."\n\n"
+					.."جایگاه: "..userrank.."\n"
 					.."رابط کاربری: "..hardware.."\n"
-					.."تعداد پیامها: "..user_info.msgs.."\n\n"
+					.."تعداد پیامها: "..user_info.msgs.."\n"
 					.."نام گروه: "..string.gsub(msg.to.print_name, "_", " ").."\n"
 					.."آی دی گروه: "..msg.to.id
-			return info
-		else
-			get_message(msg.reply_id, callback_reply, false)
+	    local user_id = msg.from.id
+            local chat_id = get_receiver(msg)
+            local db = 'https://api.telegram.org/bot'..token..'/getUserProfilePhotos?user_id='..user_id
+            local path = 'https://api.telegram.org/bot'..token..'/getFile?file_id='
+            local img = 'https://api.telegram.org/file/bot'..token..'/'
+            local res, code = https.request(db)
+            local jdat = json:decode(res)
+            local fileid = jdat.result.photos[1][3].file_id
+            local count = jdat.result.total_count
+                if tonumber(count) == 0 then
+	send_large_msg(org_chat_id,info,ok_cb,false)
+                else
+            local pt, code = https.request(path..fileid)
+            local jdat2 = json:decode(pt)
+            local path2 = jdat2.result.file_path
+            local link = img..path2
+            local photo = download_to_file(link,"ax"..user_id..".jpg")
+        send_photo2(receiver, file, photo, rmtmp_cb, cb_extra)
 		end
 	end
 end
