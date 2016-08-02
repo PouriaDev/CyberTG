@@ -2541,7 +2541,7 @@ end
 		if matches[1] == 'unlock' and is_momod(msg) then
 			local target = msg.to.id
 			     if matches[2] == 'all' then
-      	local safemode ={
+      	local dsafemode ={
                 unlock_group_links(msg, data, target),
 		unlock_group_tag(msg, data, target),
 		unlock_group_chat(msg, data, target),
@@ -2977,7 +2977,7 @@ end
 		end
 
 		if matches[1] == 'help' and not is_owner(msg) then
-			text = "Message /superhelp to @CyberTG in private for SuperGroup help"
+			text = "Send /superhelp in private for SuperGroup help"
 			reply_msg(msg.id, text, ok_cb, false)
 		elseif matches[1] == 'help' and is_owner(msg) then
 			local name_log = user_print_name(msg.from)
