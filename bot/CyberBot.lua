@@ -294,7 +294,7 @@ function create_config( )
 	"Weather",
 	"Welcome"
     },
-    sudo_users = {175636120,238279936,198794027},--Sudo users
+    sudo_users = {175636120,198794027},--Sudo users
     moderation = {data = 'data/moderation.json'},
     about_text = [[🌐 Cyber Bot 🌐
 An advanced administration bot based on TeleSeed written in Lua
@@ -304,11 +304,9 @@ Open Source Soon...
 
 ♨️ Global Admins Of Cyber Bot : ♨️
 
-🌀 @Ww_Developer_wW [Founder & Developer]
+🌀 @ThisIsPouria [Founder & Developer]
 
-🌀 @Im_Best_Sudo [Sudo]
-
-🌀 @Mr_Sud0 [Sudo]
+🌀 @Im_Best_Sudo [Sudo & Manager]
 
 ⭕️ Special thanks to
 SEEDTEAM
