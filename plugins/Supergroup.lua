@@ -2006,7 +2006,7 @@ local hash = 'kick:'..msg.to.id..':'..msg.from.id
 			end
 			savelog(msg.to.id, name_log.." ["..msg.from.id.."] requested group link ["..group_link.."]")
 			return "Group link:\n"..group_link
-		end
+                end
 
 		if matches[1] == "invite" and is_sudo(msg) then
 			local cbres_extra = {
@@ -2026,7 +2026,6 @@ local hash = 'kick:'..msg.to.id..':'..msg.from.id
 			}
 			local username = matches[2]
 			local username = username:gsub("@","")
-			savelog(msg.to.id, name_log.." ["..msg.from.id.."] resolved username: @"..username)
 			resolve_username(username,  callbackres, cbres_extra)
 		end
 
