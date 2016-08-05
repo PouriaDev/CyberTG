@@ -1222,9 +1222,17 @@ end
 		if not data[tostring(target)]['settings']['lock_member'] then
 			data[tostring(target)]['settings']['lock_member'] = 'no'
 		end
-	end
+        end
+local expiretime = redis:hget('expiretime', get_receiver(msg))
+    local expire = ''
+  if not expiretime then
+  expire = expire..'Date Not Set!'
+  else
+   local now = tonumber(os.time())
+   expire =  expire..math.floor((tonumber(expiretime) - tonumber(now)) / 86400) + 1
+ end
   local settings = data[tostring(target)]['settings']
-  local text = "⚙ SuperGroup Settings: ⚙\n➖➖➖➖➖➖➖➖➖\n🗝 Lock links : "..settings.lock_link.."\n🗝 Lock flood: "..settings.flood.."\n🗝 Flood sensitivity : "..NUM_MSG_MAX.."\n🗝 Lock spam: "..settings.lock_spam.."\n🗝 Lock Arabic: "..settings.lock_arabic.."\n🗝 Lock Member: "..settings.lock_member.."\n🗝 Lock RTL: "..settings.lock_rtl.."\n🗝 Lock Tgservice : "..settings.lock_tgservice.."\n🗝 Lock sticker: "..settings.lock_sticker.."\n🗝 Lock Chat: "..settings.chat.."\n🗝 Lock Emoji: "..settings.emoji.."\n🗝 Lock English: "..settings.english.."\n🗝 Lock Fosh: "..settings.fosh.."\n🗝 Lock Fwd: "..settings.fwd.."\n🗝 Lock Join: "..settings.join.."\n🗝 Lock Media: "..settings.media.."\n🗝 Lock Operator: "..settings.operator.."\n🗝 Lock Reply: "..settings.reply.."\n🗝 Lock Tag: "..settings.tag.."\n🗝 Lock Username: "..settings.username.."\n➖➖➖➖➖➖➖➖➖\n⚙ Media Settings: ⚙\n➖➖➖➖➖➖➖➖➖\n🖥 Lock Audio: "..settings.audio.."\n🖥 Lock Gif: "..settings.gif.."\n🖥 Lock Photo: "..settings.photo.."\n🖥 Lock Video: "..settings.video.."\n➖➖➖➖➖➖➖➖➖\n☢ Switch Models: ☢\n➖➖➖➖➖➖➖➖➖\n🗝 Switch Model Etehad: "..settings.etehad.."\n🗝 Switch Model Normal: "..settings.normal.."\n🗝 Switch Model Friendly: "..settings.friendly.."\n➖➖➖➖➖➖➖➖➖\n⚙ More Settings: ⚙\n➖➖➖➖➖➖➖➖➖\n🗝 Public: "..settings.public.."\n🗝 Strict settings: "..settings.strict.."\n🗝 Lock All: "..settings.all.."\n🔑 Bot Version: 1.0"
+  local text = "⚙ SuperGroup Settings: ⚙\n➖➖➖➖➖➖➖➖➖\n🗝 Lock links : "..settings.lock_link.."\n🗝 Lock flood: "..settings.flood.."\n🗝 Flood sensitivity : "..NUM_MSG_MAX.."\n🗝 Lock spam: "..settings.lock_spam.."\n🗝 Lock Arabic: "..settings.lock_arabic.."\n🗝 Lock Member: "..settings.lock_member.."\n🗝 Lock RTL: "..settings.lock_rtl.."\n🗝 Lock Tgservice : "..settings.lock_tgservice.."\n🗝 Lock sticker: "..settings.lock_sticker.."\n🗝 Lock Chat: "..settings.chat.."\n🗝 Lock Emoji: "..settings.emoji.."\n🗝 Lock English: "..settings.english.."\n🗝 Lock Fosh: "..settings.fosh.."\n🗝 Lock Fwd: "..settings.fwd.."\n🗝 Lock Join: "..settings.join.."\n🗝 Lock Media: "..settings.media.."\n🗝 Lock Operator: "..settings.operator.."\n🗝 Lock Reply: "..settings.reply.."\n🗝 Lock Tag: "..settings.tag.."\n🗝 Lock Username: "..settings.username.."\n➖➖➖➖➖➖➖➖➖\n⚙ Media Settings: ⚙\n➖➖➖➖➖➖➖➖➖\n🖥 Lock Audio: "..settings.audio.."\n🖥 Lock Gif: "..settings.gif.."\n🖥 Lock Photo: "..settings.photo.."\n🖥 Lock Video: "..settings.video.."\n➖➖➖➖➖➖➖➖➖\n☢ Switch Models: ☢\n➖➖➖➖➖➖➖➖➖\n🗝 Switch Model Etehad: "..settings.etehad.."\n🗝 Switch Model Normal: "..settings.normal.."\n🗝 Switch Model Friendly: "..settings.friendly.."\n➖➖➖➖➖➖➖➖➖\n⚙ More Settings: ⚙\n➖➖➖➖➖➖➖➖➖\n🗝 Public: "..settings.public.."\n🗝 Strict settings: "..settings.strict.."\n🗝 Lock All: "..settings.all.."\n⏱ Expire Time: "..expire.."\n🔑 Bot Version: 1.0"
   return text
 end
 
