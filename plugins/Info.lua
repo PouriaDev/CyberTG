@@ -17,7 +17,7 @@ local function callback_reply(extra, success, result)
 		userrank = "Moderator ⭐"
 		send_document(org_chat_id,"umbrella/stickers/mod.webp", ok_cb, false)
 	elseif tonumber(result.from.id) == tonumber(our_id) then
-		userrank = "Signal ⭐⭐⭐⭐⭐⭐"
+		userrank = "Cyber ⭐⭐⭐⭐⭐⭐"
 		send_document(org_chat_id,"umbrella/stickers/umb.webp", ok_cb, false)
 	elseif result.from.username then
 		if string.sub(result.from.username:lower(), -3) == "bot" then
@@ -195,7 +195,7 @@ local function callback_res(extra, success, result)
 		userrank = "Moderator ⭐"
 		send_document(org_chat_id,"umbrella/stickers/mod.webp", ok_cb, false)
 	elseif tonumber(result.id) == tonumber(our_id) then
-		userrank = "Signal ⭐⭐⭐⭐⭐⭐"
+		userrank = "Cyber ⭐⭐⭐⭐⭐⭐"
 		send_document(org_chat_id,"umbrella/stickers/umb.webp", ok_cb, false)
 	elseif result.from.username then
 		if string.sub(result.from.username:lower(), -3) == "bot" then
@@ -295,7 +295,7 @@ local function callback_info(extra, success, result)
 		userrank = "Moderator ⭐"
 		send_document(org_chat_id,"umbrella/stickers/mod.webp", ok_cb, false)
 	elseif tonumber(result.id) == tonumber(our_id) then
-		userrank = "Signal ⭐⭐⭐⭐⭐⭐"
+		userrank = "Cyber ⭐⭐⭐⭐⭐⭐"
 		send_document(org_chat_id,"umbrella/stickers/umb.webp", ok_cb, false)
 	elseif result.from.username then
 		if string.sub(result.from.username:lower(), -3) == "bot" then
@@ -401,10 +401,7 @@ end
 local function run(msg, matches)
 	local data = load_data(_config.moderation.data)
 	org_channel_id = "channel#id"..msg.to.id
-	if is_sudo(msg) then
 		access = 1
-	else
-		access = 0
 	end
 	if matches[1] == 'infodel' and is_sudo(msg) then
 		azlemagham = io.popen('rm ./info/'..matches[2]..'.txt'):read('*all')
