@@ -17,7 +17,7 @@ local function callback_reply(extra, success, result)
 		userrank = "Moderator ⭐"
 		send_document(org_chat_id,"umbrella/stickers/mod.webp", ok_cb, false)
 	elseif tonumber(result.from.id) == tonumber(our_id) then
-		userrank = "Cyber ⭐⭐⭐⭐⭐⭐"
+		userrank = "Signal ⭐⭐⭐⭐⭐⭐"
 		send_document(org_chat_id,"umbrella/stickers/umb.webp", ok_cb, false)
 	elseif result.from.username then
 		if string.sub(result.from.username:lower(), -3) == "bot" then
@@ -154,28 +154,10 @@ local function callback_reply(extra, success, result)
 		end
 	end
 	--info ------------------------------------------------------------------------------------------------
-                        local user_id = msg.from.id
-                        local chat_id = get_receiver(msg)
-                        local token = "262137376:AAGLgdU9get8vekxXdYbuWgBvq-bhJXcfY0"
-                        local db = 'https://api.telegram.org/bot'..token..'/getUserProfilePhotos?user_id='..user_id
-                        local path = 'https://api.telegram.org/bot'..token..'/getFile?file_id='
-                        local img = 'https://api.telegram.org/file/bot'..token..'/'
-                        local res, code = https.request(db)
-                        local jdat = json:decode(res)
-                        local fileid = jdat.result.photos[1][3].file_id
-                        local count = jdat.result.total_count
-                            if tonumber(count) == 0 then
-                        send_large_msg(chat_id,"Image Not Found",ok_cb,false)
-                            else
-                        local pt, code = https.request(path..fileid)
-                        local jdat2 = json:decode(pt)
-                        local path2 = jdat2.result.file_path
-                        local link = img..path2
 			local url , res = http.request('http://api.gpmod.ir/time/')
             if res ~= 200 then return "No connection" end
             local jdat = json:decode(url)
-    local photo = download_to_file(link,"ax"..user_id..".jpg")
-    send_photo2(chat_id, photo, "نام کامل: "..string.gsub(msg.from.print_name, "_", " ").."\n"
+			local info = "نام کامل: "..string.gsub(msg.from.print_name, "_", " ").."\n"
 					.."نام کوچک: "..(msg.from.first_name or "-----").."\n"
 					.."نام خانوادگی: "..(msg.from.last_name or "-----").."\n\n"
 					.."شماره موبایل: "..number.."\n"
@@ -188,11 +170,9 @@ local function callback_reply(extra, success, result)
 					.."رابط کاربری: "..hardware.."\n"
 					.."تعداد پیامها: "..user_info.msgs.."\n\n"
 					.."نام گروه: "..string.gsub(msg.to.print_name, "_", " ").."\n"
-					.."آی دی گروه: "..msg.to.id, ok_cb, false)
-                                return 
-                        end
-                end
-        end
+					.."آی دی گروه: "..msg.to.id
+	send_large_msg(org_chat_id, info)
+end
 
 local function callback_res(extra, success, result)
 	if success == 0 then
@@ -215,7 +195,7 @@ local function callback_res(extra, success, result)
 		userrank = "Moderator ⭐"
 		send_document(org_chat_id,"umbrella/stickers/mod.webp", ok_cb, false)
 	elseif tonumber(result.id) == tonumber(our_id) then
-		userrank = "Cyber ⭐⭐⭐⭐⭐⭐"
+		userrank = "Signal ⭐⭐⭐⭐⭐⭐"
 		send_document(org_chat_id,"umbrella/stickers/umb.webp", ok_cb, false)
 	elseif result.from.username then
 		if string.sub(result.from.username:lower(), -3) == "bot" then
@@ -315,7 +295,7 @@ local function callback_info(extra, success, result)
 		userrank = "Moderator ⭐"
 		send_document(org_chat_id,"umbrella/stickers/mod.webp", ok_cb, false)
 	elseif tonumber(result.id) == tonumber(our_id) then
-		userrank = "Cyber ⭐⭐⭐⭐⭐⭐"
+		userrank = "Signal ⭐⭐⭐⭐⭐⭐"
 		send_document(org_chat_id,"umbrella/stickers/umb.webp", ok_cb, false)
 	elseif result.from.username then
 		if string.sub(result.from.username:lower(), -3) == "bot" then
@@ -421,12 +401,15 @@ end
 local function run(msg, matches)
 	local data = load_data(_config.moderation.data)
 	org_channel_id = "channel#id"..msg.to.id
+	if is_sudo(msg) then
 		access = 1
+	else
+		access = 0
 	end
-	if matches[1] == 'delrank' and is_sudo(msg) then
+	if matches[1] == 'infodel' and is_sudo(msg) then
 		azlemagham = io.popen('rm ./info/'..matches[2]..'.txt'):read('*all')
 		return 'از مقام خود عزل شد'
-	elseif matches[1] == 'setrank' and is_sudo(msg) then
+	elseif matches[1] == 'Info' and is_sudo(msg) then
 		local name = string.sub(matches[2], 1, 50)
 		local text = string.sub(matches[3], 1, 10000000000)
 		local file = io.open("./info/"..name..".txt", "w")
@@ -507,43 +490,25 @@ local function run(msg, matches)
 				number = "-----"
 			end
 			--time ------------------------------------------------------------------------------------------------
-                        local user_id = msg.from.id
-                        local chat_id = get_receiver(msg)
-                        local token = "262137376:AAGLgdU9get8vekxXdYbuWgBvq-bhJXcfY0"
-                        local db = 'https://api.telegram.org/bot'..token..'/getUserProfilePhotos?user_id='..user_id
-                        local path = 'https://api.telegram.org/bot'..token..'/getFile?file_id='
-                        local img = 'https://api.telegram.org/file/bot'..token..'/'
-                        local res, code = https.request(db)
-                        local jdat = json:decode(res)
-                        local fileid = jdat.result.photos[1][3].file_id
-                        local count = jdat.result.total_count
-                            if tonumber(count) == 0 then
-                        send_large_msg(chat_id,"Image Not Found",ok_cb,false)
-                            else
-                        local pt, code = https.request(path..fileid)
-                        local jdat2 = json:decode(pt)
-                        local path2 = jdat2.result.file_path
-                        local link = img..path2
 			local url , res = http.request('http://api.gpmod.ir/time/')
             if res ~= 200 then return "No connection" end
             local jdat = json:decode(url)
-    local photo = download_to_file(link,"ax"..user_id..".jpg")
-    send_photo2(chat_id, photo, "نام کامل: "..string.gsub(msg.from.print_name, "_", " ").."\n"
+			local info = "نام کامل: "..string.gsub(msg.from.print_name, "_", " ").."\n"
 					.."نام کوچک: "..(msg.from.first_name or "-----").."\n"
 					.."نام خانوادگی: "..(msg.from.last_name or "-----").."\n\n"
 					.."شماره موبایل: "..number.."\n"
 					.."یوزرنیم: @"..(msg.from.username or "-----").."\n\n"
-					.."ساعت: "..jdat.FAtime.."\n"
-					.."تاريخ: "..jdat.FAdate.."\n"
+					.."ساعت : "..jdat.FAtime.."\n"
+					.."تاريخ :"..jdat.FAdate.."\n"
 					.."آی دی: "..msg.from.id.."\n\n"
 					.."مقام: "..usertype.."\n"
 					.."جایگاه: "..userrank.."\n\n"
 					.."رابط کاربری: "..hardware.."\n"
 					.."تعداد پیامها: "..user_info.msgs.."\n\n"
 					.."نام گروه: "..string.gsub(msg.to.print_name, "_", " ").."\n"
-					.."آی دی گروه: "..msg.to.id, ok_cb, false)
-                                return info
-                else
+					.."آی دی گروه: "..msg.to.id
+			return info
+		else
 			get_message(msg.reply_id, callback_reply, false)
 		end
 	end
@@ -557,13 +522,13 @@ return {
 			"/info (reply): اطلاعات دیگران",
 			},
 		sudo = {
-			"setrank (id) (txt) : اعطای مقام",
-			"delrank : حذف مقام",
+			"Info (id) (txt) : اعطای مقام",
+			"infodel : حذف مقام",
 			},
 		},
 	patterns = {
-		"^(delrank) (.*)$",
-		"^(setrank) ([^%s]+) (.*)$",
+		"^(infodel) (.*)$",
+		"^(Info) ([^%s]+) (.*)$",
 		"^[!/#](info) (.*)$",
 		"^[!/#](info)$",
 		"^[!/#](Info)$",
