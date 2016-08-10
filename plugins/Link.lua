@@ -8,64 +8,48 @@ if data[tostring(msg.to.id)] then
 	local settings = data[tostring(msg.to.id)]['settings']
 	if #matches == 2 then
 		
-		if matches[1] == 'newlink' and is_owner(msg) then
-			local function link_callback (extra , success, result)
-				local receiver = extra.receiver
+		if matches[1] == 'newlink' and is_momod(msg)then
+			local function callback_link (extra , success, result)
+			local receiver = get_receiver(msg)
 				if success == 0 then
-					return "*Error: Failed to retrieve link* \nReason: Not creator.\n\nIf you have the link, please use /setlink to set it"
+					send_large_msg(receiver, '*Error: Failed to retrieve link* \nReason: Not creator.\n\nIf you have the link, please use /setlink to set it')
+					data[tostring(msg.to.id)]['settings']['set_link'] = nil
+					save_data(_config.moderation.data, data)
+				else
+					send_large_msg(receiver, "Created a new link")
+					data[tostring(msg.to.id)]['settings']['set_link'] = result
+					save_data(_config.moderation.data, data)
 				end
-				data[tostring(msg.to.id)]['settings']['set_link'] = result
-				save_data(_config.moderation.data, data)
-				local group_link = data[tostring(msg.to.id)]['settings']['set_link']
-				send_large_msg(receiver, "Created New Link!")
 			end
-			local receiver = 'channel#'..msg.to.id
-			return export_channel_link(receiver, link_callback, {receiver = receiver})
+			savelog(msg.to.id, name_log.." ["..msg.from.id.."] attempted to create a new SuperGroup link")
+			export_channel_link(receiver, callback_link, false)
+		end
 
-		elseif matches[1] == 'link' and is_owner(msg) then
+		if matches[1] == 'setlink' and is_owner(msg) then
+			data[tostring(msg.to.id)]['settings']['set_link'] = 'waiting'
+			save_data(_config.moderation.data, data)
+			return 'Please send the new group link now'
+		end
+
+		if msg.text then
+			if msg.text:match("^(https://telegram.me/joinchat/%S+)$") and data[tostring(msg.to.id)]['settings']['set_link'] == 'waiting' and is_owner(msg) then
+				data[tostring(msg.to.id)]['settings']['set_link'] = msg.text
+				save_data(_config.moderation.data, data)
+				return "New link set"
+			end
+		end
+
+		if matches[1] == 'link' then
+			if not is_momod(msg) then
+				return
+			end
 			local group_link = data[tostring(msg.to.id)]['settings']['set_link']
 			if not group_link then
 				return "Create a link using /newlink first!\n\nOr if I am not creator use /setlink to set your link"
 			end
-			send_large_msg('user#'..msg.from.id, "Group link:\n______________________________\n"..group_link)
-		end
-		
-	else
-		
-		if matches[1] == 'newlink' and is_momod(msg) then
-			local function link_callback (extra , success, result)
-				local receiver = extra.receiver
-				if success == 0 then
-					return "Error!"
-				end
-				data[tostring(msg.to.id)]['settings']['set_link'] = result
-				save_data(_config.moderation.data, data)
-				local group_link = data[tostring(msg.to.id)]['settings']['set_link']
-				send_large_msg(receiver, "New Group Link:\n______________________________\n"..group_link)
-			end
-			local receiver = 'channel#'..msg.to.id
-			return export_channel_link(receiver, link_callback, {receiver = receiver})
-		
-		elseif matches[1] == 'clink' and is_momod(msg) then
-			local function link_callback (extra , success, result)
-				local receiver = extra.receiver
-				if success == 0 then
-					return "Error in closing link!"
-				end
-				data[tostring(msg.to.id)]['settings']['set_link'] = result
-				save_data(_config.moderation.data, data)
-				send_large_msg(receiver, "Link closed")
-			end
-			local receiver = 'channel#'..msg.to.id
-			return export_channel_link(receiver, link_callback, {receiver = receiver})
-
-		elseif matches[1] == 'link' and is_momod(msg) then
-			local group_link = data[tostring(msg.to.id)]['settings']['set_link']
-			if not group_link then
-				return "First Make  Newlink"
-			end
-			return "Group link:\n______________________________\n"..group_link
-		end
+			savelog(msg.to.id, name_log.." ["..msg.from.id.."] requested group link ["..group_link.."]")
+			return "Group link:\n"..group_link
+                end
 	end
 end
 end
@@ -75,23 +59,14 @@ return {
   description = "Link Manager System",
   usage = {
 	"/link : مشاهده لينک",
-	"/link pv : ارسال لينک در خصوصي",
 	"/newlink : ساخت لينک جديد",
-	"/newlink pv : لينک جديد در خصوصي",
-	"/clink : بستن لينک",
     },
 	},
   patterns = {
   "^[!/#]([Nn]ewlink)$",
   "^[!/#]([Ll]ink)$",
-	"^[!/#]([Nn]ewlink) ([Pp]v)$",
-  "^[!/#]([Ll]ink) ([Pp]v)$",
-	"^[!/#]([Cc]link)$",
-	"^([Nn]ewlink)$",
+  "^([Nn]ewlink)$",
   "^([Ll]ink)$",
-	"^([Nn]ewlink) ([Pp]v)$",
-  "^([Ll]ink) ([Pp]v)$",
-	"^([Cc]link)$",
   },
   run = run,
   moderated = true
